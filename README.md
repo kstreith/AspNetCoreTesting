@@ -4,7 +4,8 @@ Presentation and Code samples to demonstrate Automated ASP.NET Core Testing, spe
 
 ## Presentation
 
-<a href="http://kstreith.github.io/aspnetcoretesting/presentation/">View Slides</a>
+<a href="https://kstreith.github.io/AspNetCoreTesting/presentation/">View Slides</a>
 
 ## Code
 
+<a href="https://github.com/kstreith/AspNetCoreTesting">View Code on GitHub</a>
