@@ -1,0 +1,44 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using AuthSample.Tests.MockAuthentication;
+
+namespace AuthSample.Tests
+{
+    public class TestWebServerFixture : WebApplicationFactory<Startup>
+    {
+        public class TestStartup : Startup
+        {
+            public MockRoles MockRoles { get; }
+            public TestStartup(IConfiguration config) : base(config)
+            {
+                MockRoles = new MockRoles();
+            }
+
+            protected override void ConfigureAuthentication(IServiceCollection services)
+            {
+                services.AddSingleton(MockRoles);
+                services.AddAuthentication(MockAuthenticationHandler.AuthenticationScheme)
+                    .AddScheme<MockAuthenticationOptions, MockAuthenticationHandler>(MockAuthenticationHandler.AuthenticationScheme, _ => { });
+            }
+        }
+
+        public TestWebServerFixture()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                .AddInMemoryCollection();
+            _startup = new TestStartup(configBuilder.Build());
+        }
+
+        private readonly TestStartup _startup;
+
+        protected override IWebHostBuilder CreateWebHostBuilder()
+        {
+            return WebHost.CreateDefaultBuilder()
+                .ConfigureServices(services => { services.AddSingleton<IStartup>(_startup); });
+        }
+
+    }
+}
