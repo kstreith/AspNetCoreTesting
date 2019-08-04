@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace MvcSample.ViewComponents
+namespace RazorViewComponentSample.ViewComponents
 {
     public class RatingViewComponent : ViewComponent
     {
