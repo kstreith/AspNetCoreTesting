@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Automated Testing of ASP.NET Core</h3>
+					<h4>August 2019</h4>
+					<h4>Kip Streithorst</h4>
+				</section>
+				<section>
+					<h4>Overview</h4>
+					<ul>
+						<li>Traditional Testing of MVC - 10%</li>
+						<li>Advanced Automated Testing of MVC - 90%</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Traditional Testing</h4>
+					<ul>
+						<li>MVC controllers are C# classes</li>
+						<li>In a test, construct the controller, test the action methods.</li>
+					</ul>
+				</section>
+				<section>
+						<h4>Traditional Testing - Problems?</h4>
+						<ul>
+							<li>Misses anything that happens before or after the action method of controller.</li>
+							<li>Action or controller attributes - e.g. Routing, Authorize attributes</li>
+							<li>Response codes, response formatting</li>
+							<li>Request parsing</li>
+							<li>Dependency Injection configuration</li>
+						</ul>
+					</section>
+				</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
