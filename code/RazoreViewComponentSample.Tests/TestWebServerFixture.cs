@@ -1,27 +1,28 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using AuthSample.Tests.MockAuthentication;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
-namespace AuthSample.Tests
+namespace RazorViewComponentSample.Tests
 {
     public class TestWebServerFixture : WebApplicationFactory<Startup>
     {
         public class TestStartup : Startup
         {
-            public MockRoles MockRoles { get; }
             public TestStartup(IConfiguration config) : base(config)
             {
-                MockRoles = new MockRoles();
             }
 
-            protected override void ConfigureAuthentication(IServiceCollection services)
+            public override void ConfigureMvc(IMvcBuilder mvc)
             {
-                services.AddSingleton(MockRoles);
-                services.AddAuthentication(MockAuthenticationHandler.AuthenticationScheme)
-                    .AddScheme<MockAuthenticationOptions, MockAuthenticationHandler>(MockAuthenticationHandler.AuthenticationScheme, _ => { });
+                var assembly = typeof(RatingViewComponentController).GetTypeInfo().Assembly;
+                mvc.AddApplicationPart(assembly);
             }
         }
 

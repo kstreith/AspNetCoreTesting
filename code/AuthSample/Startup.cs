@@ -26,8 +26,7 @@ namespace AuthSample
             {
                 options.AddPolicy("GetValues", policy => policy.RequireAuthenticatedUser().RequireRole("Admin"));
             });
-            var assembly = typeof(Startup).GetTypeInfo().Assembly;
-            services.AddMvc().AddApplicationPart(assembly).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             return services.BuildServiceProvider();
         }
 
