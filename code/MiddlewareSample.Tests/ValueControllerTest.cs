@@ -36,6 +36,7 @@ namespace MiddlewareSample.Tests
             // Assert
             var responseContent = await result.Content.ReadAsStringAsync();
             result.StatusCode.Should().Be(HttpStatusCode.OK);
+            responseContent.Should().Be(@"[""value1"",""value2""]");
         }
 
         [Fact]

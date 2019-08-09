@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,16 +36,16 @@ namespace AuthSample
         public void Configure(IApplicationBuilder app)
         {
             var env = app.ApplicationServices.GetService<IHostingEnvironment>();
-            //if (env.IsDevelopment())
-            //{
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    //app.UseHsts();
-            //}
+            }
+            else
+            {
+                app.UseHsts();
+            }
             app.UseAuthentication();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
