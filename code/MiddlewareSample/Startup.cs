@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MiddlewareSample.Middleware;
 
 namespace MiddlewareSample
 {
@@ -24,14 +25,11 @@ namespace MiddlewareSample
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            if (!env.IsDevelopment())
             {
                 app.UseHsts();
             }
+            app.UseExceptionHandler(configure => configure.UseMiddleware(typeof(ErrorResponseMiddleware)));
             app.UseHttpsRedirection();
             app.UseMvc();
         }

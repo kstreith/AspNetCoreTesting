@@ -32,6 +32,7 @@ namespace AuthSample.Tests
             _startup = new TestStartup(configBuilder.Build());
         }
 
+        public MockRoles MockRoles => _startup?.MockRoles;
         private readonly TestStartup _startup;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)

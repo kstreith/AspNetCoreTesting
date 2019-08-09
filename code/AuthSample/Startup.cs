@@ -22,10 +22,7 @@ namespace AuthSample
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             ConfigureAuthentication(services);
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("GetValues", policy => policy.RequireAuthenticatedUser().RequireRole("Admin"));
-            });
+            services.AddAuthorization(options => AuthPolicies.AddToOptions(options));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             return services.BuildServiceProvider();
         }

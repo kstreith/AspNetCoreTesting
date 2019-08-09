@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Automated Testing of ASP.NET Core</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -28,14 +28,31 @@
 				<section>
 					<h3>Automated Testing of ASP.NET Core</h3>
 					<h4>August 2019</h4>
-					<h4>View slides at: https://kstreith.github.io/AspNetCoreTesting/presentation/</h4>
-					<h4>Kip Streithorst</h4>
+					<h4>Follow along at:</h4>
+					<p><a href="https://kstreith.github.io/AspNetCoreTesting/">https://kstreith.github.io/AspNetCoreTesting/</a></p>
+					<p>Kip Streithorst</p>
+				</section>
+				<section>
+					<h4>Please ask questions</h4>
+					<ul>
+						<li>Questions are welcome throughout</li>
+					</ul>
 				</section>
 				<section>
 					<h4>Overview</h4>
 					<ul>
-						<li>Traditional Testing of MVC - 10%</li>
-						<li>Advanced Automated Testing of MVC - 90%</li>
+						<li>Controller/Action method testing</li>
+						<li>Then, transition to new ASP.NET Core Testing features</li>
+						<li>TestHost/WebApplicationFactory</li>
+						<li>Mostly sample code and demos</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Testing Terminology</h4>
+					<ul>
+						<li>Lots of testing terms - unit vs integration, etc.</li>
+						<li>This presentation will cover my own term, "Automated Developer testing"</li>
+						<li>Developer Testing - automated tests run often by Developer, while coding, typically from their IDE.</li>
 					</ul>
 				</section>
 				<section>
@@ -46,16 +63,52 @@
 					</ul>
 				</section>
 				<section>
-						<h4>Traditional Testing - Problems?</h4>
-						<ul>
-							<li>Misses anything that happens before or after the action method of controller.</li>
-							<li>Action or controller attributes - e.g. Routing, Authorize attributes</li>
-							<li>Response codes, response formatting</li>
-							<li>Request parsing</li>
-							<li>Dependency Injection configuration</li>
-						</ul>
-					</section>
-				</div>
+					<h4>Traditional Testing - Problems?</h4>
+					<ul>
+						<li>Misses anything that happens before or after the action method of controller.</li>
+						<li>Action or controller attributes - e.g. Routing, Authorize attributes</li>
+						<li>Response codes, response formatting</li>
+						<li>Request parsing</li>
+						<li>Dependency Injection configuration</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Traditional Testing - Demo</h4>
+					<ul>
+						<li>Demo</li>
+					</ul>
+				</section>
+				<section>
+					<h4>New ASP.Net Core Testing Features</h4>
+					<ul>
+						<li>1.x - TestServer</li>
+						<li>2.x - WebApplicationFactory - helper method around TestServer</li>
+						<li>TestServer - in-memory version of entire ASP.Net Core Server, with connected HttpClient instance.</li>
+						<li>Full stack executes, middleware, routing, authorization, model binding, DI, etc.</li>
+					</ul>
+				</section>
+				<section>
+					<h4>More Demos</h4>
+					<ul>
+						<li>Middleware Testing</li>
+						<li>Authorization Testing</li>
+						<li>View Testing (e.g. result of .cshtml executing)
+							<ul>
+								<li>MVC</Li>
+								<li>RazorViewComponent</Li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Thanks, questions?</h4>
+					<ul>
+						<li>Thanks for attending</li>
+						<li>Any Questions?</li>
+						<p><a href="https://kstreith.github.io/AspNetCoreTesting/">https://kstreith.github.io/AspNetCoreTesting/</a></p>
+					</ul>
+				</section>
+			</div>
 		</div>
 
 		<script src="js/reveal.js"></script>

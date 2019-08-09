@@ -1,4 +1,6 @@
+using AuthSample.Tests.MockAuthentication;
 using FluentAssertions;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,37 +16,47 @@ namespace AuthSample.Tests
             _testServerFixture = testServerFixture;
         }
 
-        private HttpClient Arrange()
+        private HttpClient Arrange(string role)
         {
+            if (role != null)
+            {
+                _testServerFixture.MockRoles.Roles = new List<string> { role };
+            }
+            else
+            {
+                _testServerFixture.MockRoles.Roles = MockRoles.GetAllRoles();
+            }
             return _testServerFixture.CreateDefaultClient();
         }
 
-        [Fact]
-        public async Task GetValues_Works()
+        [Theory]
+        [InlineData("GetValues", true)]
+        [InlineData("PostValue", false)]
+        public async Task GetValues_Works(string role, bool shouldAuthorize)
         {
             // Arrange
-            var client = Arrange();
+            var client = Arrange(role);
 
             // Act
             var result = await client.GetAsync("/api/values");
 
             // Assert
-            var responseContent = await result.Content.ReadAsStringAsync();
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            result.StatusCode.Should().Be(shouldAuthorize ? HttpStatusCode.OK : HttpStatusCode.Forbidden);
         }
 
-        [Fact]
-        public async Task GetValue_Works()
+        [Theory]
+        [AuthorizedForOnlyThisRole("GetValue")]
+        public async Task GetValue_Works(string role, bool shouldAuthorize)
         {
             // Arrange
-            var client = Arrange();
+            var client = Arrange(role);
 
             // Act
             var result = await client.GetAsync("/api/values/5");
 
             // Assert
             var responseContent = await result.Content.ReadAsStringAsync();
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            result.StatusCode.Should().Be(shouldAuthorize ? HttpStatusCode.OK : HttpStatusCode.Forbidden);
         }
 
     }

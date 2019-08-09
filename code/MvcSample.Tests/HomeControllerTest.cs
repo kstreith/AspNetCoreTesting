@@ -22,7 +22,7 @@ namespace MvcSample.Tests
         }
 
         [Fact]
-        public async Task GetIndex_Works()
+        public async Task GetIndex_PageTitle_IsCorrect()
         {
             // Arrange
             var client = Arrange();
@@ -37,9 +37,6 @@ namespace MvcSample.Tests
             var document = await context.OpenAsync(req => req.Content(responseStream));
             var title = document.QuerySelector("title");
             title.TextContent.Should().Be("Home Page - MvcSample");
-            var inlineTitle = document.QuerySelector(".text-center > h1");
-            inlineTitle.TextContent.Should().Be("Welcome");
-            inlineTitle.ClassList.Should().Contain("display-4");
         }
 
         [Fact]

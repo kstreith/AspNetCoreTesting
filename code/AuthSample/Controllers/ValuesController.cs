@@ -10,7 +10,7 @@ namespace AuthSample.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize("GetValues")]
+        [Authorize("GetValuesPolicy")]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };
@@ -18,6 +18,7 @@ namespace AuthSample.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Authorize("GetValuePolicy")]
         public ActionResult<string> Get(int id)
         {
             return "value";
@@ -25,19 +26,8 @@ namespace AuthSample.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize("PostValuePolicy")]
         public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
         {
         }
     }

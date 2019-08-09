@@ -4,9 +4,15 @@ namespace AuthSample.Tests.MockAuthentication
 {
     public class MockRoles
     {
-        public MockRoles()
+        public static List<string> GetAllRoles()
         {
-            Roles.Add("Admin");
+            var roles = new List<string>
+            {
+                "GetValue",
+                "GetValues",
+                "PostValue"
+            };
+            return roles;
         }
 
         public List<string> Roles { get; set; } = new List<string>();
