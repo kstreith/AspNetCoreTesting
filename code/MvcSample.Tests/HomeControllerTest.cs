@@ -40,18 +40,26 @@ namespace MvcSample.Tests
         }
 
         [Fact]
-        public async Task GetPrivacy_Works()
+        public async Task GetIndex_AllImagesTags_HaveAltText()
         {
             // Arrange
             var client = Arrange();
 
             // Act
-            var result = await client.GetAsync("/home/privacy");
+            var result = await client.GetAsync("/");
 
             // Assert
-            var responseContent = await result.Content.ReadAsStringAsync();
             result.StatusCode.Should().Be(HttpStatusCode.OK);
+            var responseStream = await result.Content.ReadAsStreamAsync();
+            var context = BrowsingContext.New(Configuration.Default);
+            var document = await context.OpenAsync(req => req.Content(responseStream));
+            var imageTags = document.QuerySelectorAll("img");
+            foreach (var image in imageTags)
+            {
+                var altText = image.Attributes["alt"];
+                altText.Should().NotBeNull(image.ToHtml());
+                altText.Value.Should().NotBeNullOrEmpty(image.ToHtml());
+            }
         }
-
     }
 }

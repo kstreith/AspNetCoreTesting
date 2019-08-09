@@ -2,11 +2,11 @@
 
 namespace RazorViewComponentSample.Tests
 {
-    public class RatingViewComponentController : Controller
+    public class AchievementSummaryViewComponentController : Controller
     {
         public IActionResult Basic()
         {
-            return ViewComponent("Rating", new { stars = 5 });
+            return ViewComponent("AchievementSummary");
         }
     }
 }

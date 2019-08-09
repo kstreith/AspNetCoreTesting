@@ -22,11 +22,17 @@ namespace RazorViewComponentSample
             var mvc = services.AddMvc();
             ConfigureMvc(mvc);
             mvc.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            AddDependencies(services);
 
             return services.BuildServiceProvider();
         }
 
-        public virtual void ConfigureMvc(IMvcBuilder mvc)
+        protected virtual void AddDependencies(IServiceCollection services)
+        {
+            //TODO: Register implementation of IAchievementRepository
+        }
+
+        protected virtual void ConfigureMvc(IMvcBuilder mvc)
         {
         }
 

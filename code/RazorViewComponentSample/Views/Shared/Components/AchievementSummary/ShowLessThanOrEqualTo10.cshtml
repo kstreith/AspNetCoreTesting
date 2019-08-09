@@ -1,0 +1,9 @@
+﻿@model List<Achievement>
+<div>
+    <ul>
+        @foreach (var item in Model.OrderByDescending(x => x.DateEarned))
+        {
+            <li>@item.Name - @item.DateEarned.ToString("D")</li>
+        }
+    </ul>
+</div>
